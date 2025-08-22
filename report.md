@@ -24,15 +24,16 @@ The Two Moons distribution was generated using scikit-learn's `make_moons` funct
 ```python
 X, _ = make_moons(n_samples=10000, noise=0.08, random_state=0)
 ```
+For details of data generation, you can refer to [src/data.py](src/data.py)
 
 ### 2.2 Model Architecture
 
-The baseline model implemented is a basic Diffusion with MLP model - a simple multi-layer perceptron specifically for 2D point data where we predict the noise added to the 2d points with sinusoidal time embeddings.
+The [baseline model](src/model.py) implemented is a basic Diffusion with MLP model - a simple multi-layer perceptron specifically for 2D point data where we predict the noise added to the 2d points with sinusoidal time embeddings.
 
 
 ### 2.3 Training Procedure
 
-The training follows the standard DDPM framework:
+The [training loop](src/train.py) follows the standard DDPM framework:
 
 **Forward Process:**
 - Add Gaussian noise to data according to a predefined schedule
@@ -50,20 +51,19 @@ The training follows the standard DDPM framework:
 
 ### 2.4 Sampling Strategy
 
+[Sampling loop](src/sampling.py) follows standard reverse diffusion process:
+
 1. Start from pure Gaussian noise
 2. Iteratively denoise using the trained model
 3. Apply the reverse diffusion process step by step
 4. Use the predicted noise to estimate the denoised data
 
-**Sampling Parameters:**
-- **Number of samples**: 2,000 for evaluation
-- **Timesteps**: 200 (same as training)
 
 ## 3. Evaluation Framework
 
 ### 3.1 Metrics
 
-The evaluation framework includes multiple complementary metrics:
+The [evaluation framework](src/eval.py) includes multiple complementary metrics:
 
 1. **Maximum Mean Discrepancy (MMD)**: Measures distribution similarity using RBF kernel
 2. **Kullback–Leibler divergence**: Measures distribution difference
@@ -79,7 +79,7 @@ Two types of plots are generated:
 
 ## 4. Experiment Setup
 
-Two parameters are being tested and grid-searched
+Two parameters are being tested and grid-searched which roughly corresponds to the complexity of MLP model.
 
 ### Hidden size of MLP layer
 
