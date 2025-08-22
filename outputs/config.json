@@ -1,0 +1,23 @@
+{
+  "n_samples": 10000,
+  "noise": 0.08,
+  "random_state": 1,
+  "normalize": true,
+  "model_type": "mlp",
+  "hidden": 128,
+  "time_emb_dim": 32,
+  "num_layers": 2,
+  "batch_size": 256,
+  "lr": 0.0002,
+  "epochs": 60,
+  "timesteps": 200,
+  "beta_start": 0.0001,
+  "beta_end": 0.02,
+  "save_every": 10,
+  "n_generated_samples": 2000,
+  "n_eval_samples": 2000,
+  "device": "cpu",
+  "output_dir": "outputs",
+  "seed": 42,
+  "distribution_type": "two_moons"
+}

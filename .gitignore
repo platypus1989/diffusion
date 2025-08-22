@@ -165,7 +165,6 @@ cython_debug/
 .uv/
 
 # Project specific
-outputs/
 *.pt
 *.npz
 *.png
