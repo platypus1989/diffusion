@@ -4,7 +4,7 @@
   "random_state": 1,
   "normalize": true,
   "model_type": "mlp",
-  "hidden": 128,
+  "hidden": 512,
   "time_emb_dim": 32,
   "num_layers": 2,
   "batch_size": 256,
@@ -17,6 +17,6 @@
   "n_generated_samples": 2000,
   "n_eval_samples": 2000,
   "device": "cuda",
-  "output_dir": "outputs",
+  "output_dir": "outputs/hidden_512",
   "seed": 42
 }

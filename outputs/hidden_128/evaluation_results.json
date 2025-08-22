@@ -9,7 +9,7 @@
     "n_generated": 2000
   },
   "plot_paths": {
-    "scatter": "outputs/scatter_comparison.png",
-    "overlay": "outputs/overlay_comparison.png"
+    "scatter": "outputs/hidden_128/scatter_comparison.png",
+    "overlay": "outputs/hidden_128/overlay_comparison.png"
   }
 }

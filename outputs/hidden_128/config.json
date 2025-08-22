@@ -17,6 +17,6 @@
   "n_generated_samples": 2000,
   "n_eval_samples": 2000,
   "device": "cuda",
-  "output_dir": "outputs",
+  "output_dir": "outputs/hidden_128",
   "seed": 42
 }

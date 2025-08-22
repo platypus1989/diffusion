@@ -1,0 +1,15 @@
+{
+  "metrics": {
+    "mmd": 0.004930257797241211,
+    "kl_divergence": 11.161575378930756,
+    "mean_diff": 0.07800614833831787,
+    "std_diff": 0.04100119322538376,
+    "coverage_ratio": 1.0,
+    "n_real": 2000,
+    "n_generated": 2000
+  },
+  "plot_paths": {
+    "scatter": "outputs/hidden_64/scatter_comparison.png",
+    "overlay": "outputs/hidden_64/overlay_comparison.png"
+  }
+}

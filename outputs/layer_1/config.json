@@ -6,7 +6,7 @@
   "model_type": "mlp",
   "hidden": 128,
   "time_emb_dim": 32,
-  "num_layers": 2,
+  "num_layers": 1,
   "batch_size": 256,
   "lr": 0.0002,
   "epochs": 60,
@@ -17,6 +17,6 @@
   "n_generated_samples": 2000,
   "n_eval_samples": 2000,
   "device": "cuda",
-  "output_dir": "outputs",
+  "output_dir": "outputs/layer_1",
   "seed": 42
 }
