@@ -164,7 +164,3 @@ cython_debug/
 # uv
 .uv/
 
-# Project specific
-*.pt
-*.npz
-*.png
