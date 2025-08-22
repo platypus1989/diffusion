@@ -3,6 +3,7 @@
   "noise": 0.08,
   "random_state": 1,
   "normalize": true,
+  "test_ratio": 0.2,
   "model_type": "mlp",
   "hidden": 128,
   "time_emb_dim": 32,
