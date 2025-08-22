@@ -8,8 +8,6 @@ from .util import precompute_diffusion_params
 
 
 def train_diffusion_model(model, dataset, config: Dict[str, Any]):
-    """Train a diffusion model."""
-    # Precompute diffusion parameters
     diffusion_params = precompute_diffusion_params(
         timesteps=config['timesteps'],
         beta_start=config['beta_start'],
@@ -17,14 +15,14 @@ def train_diffusion_model(model, dataset, config: Dict[str, Any]):
         device=config['device']
     )
     
-    # Setup
     model = model.to(config['device'])
     optimizer = optim.Adam(model.parameters(), lr=config['lr'])
     loss_fn = nn.MSELoss()
     dataloader = dataset.create_dataloader(
         batch_size=config['batch_size'],
         shuffle=True,
-        drop_last=True
+        drop_last=True,
+        split='train'
     )
     
     os.makedirs(config['output_dir'], exist_ok=True)

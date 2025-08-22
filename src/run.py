@@ -22,8 +22,7 @@ from src.sampling import sample_from_model
 from src.eval import evaluate_model
 
 
-def set_seed(seed: int = 42):
-    """Set random seeds for reproducibility."""
+def set_seed(seed: int = 1):
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
@@ -40,6 +39,7 @@ def get_default_config() -> Dict[str, Any]:
         'noise': 0.08,
         'random_state': 1,
         'normalize': True,
+        'test_ratio': 0.2,
         
         # Model configuration
         'model_type': 'mlp', 
@@ -65,7 +65,7 @@ def get_default_config() -> Dict[str, Any]:
         # System configuration
         'device': 'cuda' if torch.cuda.is_available() else 'cpu',
         'output_dir': 'outputs',
-        'seed': 42
+        'seed': 1
     }
 
 
@@ -83,6 +83,7 @@ def main():
     parser.add_argument('--output-dir', type=str, default='outputs', help='Output directory')
     parser.add_argument('--experiment-name', type=str, default=None, help='Experiment name')
     parser.add_argument('--seed', type=int, default=42, help='Random seed')
+    parser.add_argument('--test-ratio', type=float, default=0.2, help='Test set size ratio (default: 0.2)')
     
     args = parser.parse_args()
     
@@ -102,6 +103,7 @@ def main():
     config['lr'] = args.lr
     config['output_dir'] = args.output_dir if args.experiment_name is None else os.path.join(args.output_dir, args.experiment_name)
     config['seed'] = args.seed
+    config['test_ratio'] = args.test_ratio
     
     # Set seed
     set_seed(config['seed'])
@@ -122,12 +124,19 @@ def main():
         n_samples=config['n_samples'],
         noise=config['noise'],
         random_state=config['seed'],
-        normalize=config['normalize']
+        normalize=config['normalize'],
+        test_ratio=config['test_ratio']
     )
     
-    # Get real data for evaluation
-    real_data = dataset.data
+    # Get test data for evaluation
+    test_data = dataset.test_data
+    train_data = dataset.train_data
     mean, std = dataset.mean, dataset.std
+    
+    print(f"Dataset split:")
+    print(f"  - Training samples: {len(train_data)}")
+    print(f"  - Test samples: {len(test_data)}")
+    print(f"  - Test ratio: {config['test_ratio']}")
     
     # Create model
     print(f"\nCreating {config['model_type']} model...")
@@ -158,12 +167,12 @@ def main():
     # Denormalize samples
     if mean is not None and std is not None:
         generated_samples = dataset.denormalize(generated_samples)
-        real_data = dataset.denormalize(real_data)
+        test_data = dataset.denormalize(test_data)
         
     # Evaluate model
     print(f"\nEvaluating model...")
     results = evaluate_model(
-        real_samples=real_data,
+        real_samples=test_data,
         generated_samples=generated_samples,
         n_samples=config['n_eval_samples'],
         output_dir=config['output_dir']

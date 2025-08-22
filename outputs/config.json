@@ -3,6 +3,7 @@
   "noise": 0.08,
   "random_state": 1,
   "normalize": true,
+  "test_ratio": 0.2,
   "model_type": "mlp",
   "hidden": 128,
   "time_emb_dim": 32,
@@ -16,7 +17,7 @@
   "save_every": 10,
   "n_generated_samples": 2000,
   "n_eval_samples": 2000,
-  "device": "cuda",
+  "device": "cpu",
   "output_dir": "outputs",
   "seed": 42
 }
