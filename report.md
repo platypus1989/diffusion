@@ -27,12 +27,8 @@ X, _ = make_moons(n_samples=10000, noise=0.08, random_state=0)
 
 ### 2.2 Model Architecture
 
-The baseline model implemented is a **DiffusionMLP** - a simple multi-layer perceptron specifically designed for 2D point data.
+The baseline model implemented is a basic Diffusion with MLP model - a simple multi-layer perceptron specifically for 2D point data where we predict the noise added to the 2d points with sinusoidal time embeddings.
 
-**Key Features:**
-- Time conditioning through sinusoidal embeddings
-- Noise prediction objective 
-- Simple architecture suitable for 2D point distributions
 
 ### 2.3 Training Procedure
 
@@ -95,7 +91,9 @@ Varying from 1 to 5
 
 ## Experiment Results
 
-With default setup of `hidden_size=128` and `number_layers=2`
+### Default Setup
+
+`hidden_size=128` and `number_layers=2`
 
 | Metric | Value |
 |--------|-------|
@@ -109,4 +107,23 @@ With default setup of `hidden_size=128` and `number_layers=2`
 ![Overlay Comparison](outputs/overlay_comparison.png)
 ![Side by Side Comparison](outputs/scatter_comparison.png)
 
+### Varying Hidden Sizes and Numbers of Layers
 
+|   Hidden Size |      MMD |   KL Divergence |
+|--------------:|---------:|----------------:|
+|           512 | 0.001403 |         7.90102 |
+|           256 | 0.001252 |         8.77287 |
+|           128 | 0.001882 |        10.721   |
+|            64 | 0.002494 |        13.3076  |
+|            32 | 0.008491 |        14.6743  |
+
+|   Number of Layers |      MMD |   KL Divergence |
+|-------------------:|---------:|----------------:|
+|                  5 | 0.002959 |         8.18184 |
+|                  4 | 0.001342 |         8.86322 |
+|                  3 | 0.001697 |         9.34921 |
+|                  2 | 0.001882 |        10.721   |
+|                  1 | 0.008849 |        14.0053  |
+
+
+From the results, we can see KL divergence generally decreases as the model complexity increases (higher hidden sizes and more number of layers) whereas the MMD score reaches the optim when `hidden_size = 256` and `number_layers = 4`.
