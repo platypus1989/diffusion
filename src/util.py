@@ -5,7 +5,7 @@ from typing import Tuple
 
 def sinusoidal_time_embedding(timesteps: torch.Tensor, dim: int = 32) -> torch.Tensor:
     half = dim // 2
-    freqs = torch.exp(-math.log(10000) * torch.arange(0, half, dtype=torch.float32) / half)
+    freqs = torch.exp(-math.log(10000) * torch.arange(0, half, dtype=torch.float32) / half).to(timesteps.device)
     args = timesteps[..., None].float() * freqs[None, :]
     emb = torch.cat([torch.sin(args), torch.cos(args)], dim=-1)
     if dim % 2:

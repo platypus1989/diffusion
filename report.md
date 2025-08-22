@@ -99,11 +99,11 @@ With default setup of `hidden_size=128` and `number_layers=2`
 
 | Metric | Value |
 |--------|-------|
-| MMD | 0.0011733174324035645 |
-| KL Divergence | 7.550682718023482 |
-| Mean Difference | 0.021316763013601303 |
-| Standard Deviation Difference | 0.02378990314900875 |
-| Coverage Ratio | 0.9955202341079712 |
+| MMD | 0.00117 |
+| KL Divergence | 7.550 |
+| Mean Difference | 0.0213 |
+| Standard Deviation Difference | 0.0238 |
+| Coverage Ratio | 0.9955 |
 
 
 ![Overlay Comparison](outputs/overlay_comparison.png)
